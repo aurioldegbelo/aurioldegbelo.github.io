@@ -1,0 +1,400 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY terms "http://purl.org/dc/terms/" >
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY geoi "http://aurioldegbelo.github.io/geoi/ns#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+]>
+
+
+<rdf:RDF xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://www.w3.org/2002/07/owl"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:terms="http://purl.org/dc/terms/"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:geoi="http://aurioldegbelo.github.io/geoi/ns#">
+    <Ontology rdf:about="http://aurioldegbelo.github.io/geoi/ns">
+        <versionInfo>1.0</versionInfo>
+        <terms:creator>Auriol Degbelo</terms:creator>
+        <terms:title>GeoInsight Content Design Pattern</terms:title>
+        <rdfs:comment>ontology design pattern for the annotation of geovisualization content</rdfs:comment>
+    </Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://purl.org/dc/terms/creator -->
+
+    <AnnotationProperty rdf:about="&terms;creator"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/title -->
+
+    <AnnotationProperty rdf:about="&terms;title"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://aurioldegbelo.github.io/geoi/ns#about -->
+
+    <ObjectProperty rdf:about="&geoi;about">
+        <rdfs:comment>referent of a content statement (either a dataview, a geovisualization or a thematic layer)</rdfs:comment>
+        <rdfs:domain rdf:resource="&geoi;ContentStatement"/>
+        <rdfs:range>
+            <Class>
+                <unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&geoi;DataView"/>
+                    <rdf:Description rdf:about="&geoi;Geovisualization"/>
+                    <rdf:Description rdf:about="&geoi;ThematicLayer"/>
+                </unionOf>
+            </Class>
+        </rdfs:range>
+    </ObjectProperty>
+    
+
+
+    <!-- http://aurioldegbelo.github.io/geoi/ns#asGraphicalNote -->
+
+    <ObjectProperty rdf:about="&geoi;asGraphicalNote">
+        <rdfs:domain rdf:resource="&geoi;ContentStatement"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://aurioldegbelo.github.io/geoi/ns#asMachineReadableDescription -->
+
+    <ObjectProperty rdf:about="&geoi;asMachineReadableDescription">
+        <rdfs:comment>machine readable description (RDF) of a content statement</rdfs:comment>
+        <rdfs:domain rdf:resource="&geoi;ContentStatement"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://aurioldegbelo.github.io/geoi/ns#createdBy -->
+
+    <ObjectProperty rdf:about="&geoi;createdBy">
+        <rdfs:comment>a property to relate a content statement to the agent that created it</rdfs:comment>
+        <rdfs:domain rdf:resource="&geoi;ContentStatement"/>
+        <rdfs:range rdf:resource="&terms;Agent"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://aurioldegbelo.github.io/geoi/ns#endorsedBy -->
+
+    <ObjectProperty rdf:about="&geoi;endorsedBy">
+        <rdfs:comment>a property to relate a content statement to an agent that endorsed (i.e. recommended) it</rdfs:comment>
+        <rdfs:domain rdf:resource="&geoi;ContentStatement"/>
+        <rdfs:range rdf:resource="&terms;Agent"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://aurioldegbelo.github.io/geoi/ns#hasComponent -->
+
+    <ObjectProperty rdf:about="&geoi;hasComponent">
+        <rdfs:comment>links a thematic layer to the dataviews that are part of it</rdfs:comment>
+        <rdfs:range rdf:resource="&geoi;DataView"/>
+        <rdfs:domain rdf:resource="&geoi;ThematicLayer"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://aurioldegbelo.github.io/geoi/ns#highlightsPattern -->
+
+    <ObjectProperty rdf:about="&geoi;highlightsPattern">
+        <rdfs:comment>property that relates a content statement to a data pattern that it highlights</rdfs:comment>
+        <rdfs:domain rdf:resource="&geoi;ContentStatement"/>
+        <rdfs:range rdf:resource="&geoi;DataPattern"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://aurioldegbelo.github.io/geoi/ns#shows -->
+
+    <ObjectProperty rdf:about="&geoi;shows">
+        <rdfs:comment>one of the perspectives on a dataset offered by a geovisualization</rdfs:comment>
+        <rdfs:domain rdf:resource="&geoi;Geovisualization"/>
+        <rdfs:range>
+            <Class>
+                <unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&geoi;DataView"/>
+                    <rdf:Description rdf:about="&geoi;ThematicLayer"/>
+                </unionOf>
+            </Class>
+        </rdfs:range>
+    </ObjectProperty>
+    
+
+
+    <!-- http://purl.org/dc/terms/spatial -->
+
+    <ObjectProperty rdf:about="&terms;spatial">
+        <rdfs:label>spatialCoverage</rdfs:label>
+        <rdfs:comment>spatial region for which the content statement is valid</rdfs:comment>
+        <rdfs:domain rdf:resource="&geoi;ContentStatement"/>
+        <rdfs:range rdf:resource="&geoi;SpatialRegion"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://purl.org/dc/terms/temporal -->
+
+    <ObjectProperty rdf:about="&terms;temporal">
+        <rdfs:label>temporalCoverage</rdfs:label>
+        <rdfs:comment>temporal region for which the content statement is valid</rdfs:comment>
+        <rdfs:domain rdf:resource="&geoi;ContentStatement"/>
+        <rdfs:range rdf:resource="&geoi;TemporalRegion"/>
+    </ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://aurioldegbelo.github.io/geoi/ns#asTextualDescription -->
+
+    <DatatypeProperty rdf:about="&geoi;asTextualDescription">
+        <rdfs:comment>the textual description of a content statement</rdfs:comment>
+        <rdfs:domain rdf:resource="&geoi;ContentStatement"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://aurioldegbelo.github.io/geoi/ns#Chart -->
+
+    <Class rdf:about="&geoi;Chart">
+        <rdfs:subClassOf rdf:resource="&geoi;DataView"/>
+        <rdfs:comment>a data view that is neither a map nor a data table</rdfs:comment>
+    </Class>
+    
+
+
+    <!-- http://aurioldegbelo.github.io/geoi/ns#Cluster -->
+
+    <Class rdf:about="&geoi;Cluster">
+        <rdfs:subClassOf rdf:resource="&geoi;DataPattern"/>
+        <rdfs:comment>group of similar items</rdfs:comment>
+    </Class>
+    
+
+
+    <!-- http://aurioldegbelo.github.io/geoi/ns#ContentStatement -->
+
+    <Class rdf:about="&geoi;ContentStatement">
+        <disjointWith rdf:resource="&geoi;Geovisualization"/>
+        <disjointWith rdf:resource="&terms;Agent"/>
+        <rdfs:comment>statement that summarizes interesting facts portrayed by a geovisualization</rdfs:comment>
+    </Class>
+    
+
+
+    <!-- http://aurioldegbelo.github.io/geoi/ns#Correlation -->
+
+    <Class rdf:about="&geoi;Correlation">
+        <rdfs:subClassOf rdf:resource="&geoi;DataPattern"/>
+        <rdfs:comment>relationship between data dimensions</rdfs:comment>
+    </Class>
+    
+
+
+    <!-- http://aurioldegbelo.github.io/geoi/ns#DataPattern -->
+
+    <Class rdf:about="&geoi;DataPattern">
+        <rdfs:comment>high-level characteristic that is highlighted by a geovisualization</rdfs:comment>
+    </Class>
+    
+
+
+    <!-- http://aurioldegbelo.github.io/geoi/ns#DataTable -->
+
+    <Class rdf:about="&geoi;DataTable">
+        <rdfs:subClassOf rdf:resource="&geoi;DataView"/>
+        <rdfs:comment>a row-column view of the data</rdfs:comment>
+    </Class>
+    
+
+
+    <!-- http://aurioldegbelo.github.io/geoi/ns#DataView -->
+
+    <Class rdf:about="&geoi;DataView">
+        <disjointWith rdf:resource="&geoi;Geovisualization"/>
+        <disjointWith rdf:resource="&geoi;ThematicLayer"/>
+        <rdfs:comment>a perspective on a geographic dataset</rdfs:comment>
+    </Class>
+    
+
+
+    <!-- http://aurioldegbelo.github.io/geoi/ns#Distribution -->
+
+    <Class rdf:about="&geoi;Distribution">
+        <rdfs:subClassOf rdf:resource="&geoi;DataPattern"/>
+        <rdfs:comment>extent and frequency of items</rdfs:comment>
+    </Class>
+    
+
+
+    <!-- http://aurioldegbelo.github.io/geoi/ns#Frequency -->
+
+    <Class rdf:about="&geoi;Frequency">
+        <rdfs:subClassOf rdf:resource="&geoi;DataPattern"/>
+        <rdfs:comment>how often items appear</rdfs:comment>
+    </Class>
+    
+
+
+    <!-- http://aurioldegbelo.github.io/geoi/ns#Geovisualization -->
+
+    <Class rdf:about="&geoi;Geovisualization">
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&geoi;shows"/>
+                <someValuesFrom rdf:resource="&geoi;DataView"/>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&geoi;shows"/>
+                <someValuesFrom rdf:resource="&geoi;ThematicLayer"/>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>an artifact whose visual properties encode geographic data</rdfs:comment>
+    </Class>
+    
+
+
+    <!-- http://aurioldegbelo.github.io/geoi/ns#Map -->
+
+    <Class rdf:about="&geoi;Map">
+        <rdfs:subClassOf rdf:resource="&geoi;DataView"/>
+        <rdfs:comment>a data view that maintains spatial relationships explicitly; maps maintain the direct association between the physical space and the represented space</rdfs:comment>
+    </Class>
+    
+
+
+    <!-- http://aurioldegbelo.github.io/geoi/ns#Outlier -->
+
+    <Class rdf:about="&geoi;Outlier">
+        <rdfs:subClassOf rdf:resource="&geoi;DataPattern"/>
+        <rdfs:comment>item that does not match a distribution</rdfs:comment>
+    </Class>
+    
+
+
+    <!-- http://aurioldegbelo.github.io/geoi/ns#SpatialRegion -->
+
+    <Class rdf:about="&geoi;SpatialRegion">
+        <disjointWith rdf:resource="&geoi;TemporalRegion"/>
+        <rdfs:comment>A region of space. It may be specifed precisely (e.g. using geometries or a zoom level of a map), or vaguely (using a place name)</rdfs:comment>
+    </Class>
+    
+
+
+    <!-- http://aurioldegbelo.github.io/geoi/ns#TemporalRegion -->
+
+    <Class rdf:about="&geoi;TemporalRegion">
+        <rdfs:comment>A region of time. It may be specified precisely using a timestamp/ time interval or vaguely using a temporal description in natural language</rdfs:comment>
+    </Class>
+    
+
+
+    <!-- http://aurioldegbelo.github.io/geoi/ns#ThematicLayer -->
+
+    <Class rdf:about="&geoi;ThematicLayer">
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&geoi;hasComponent"/>
+                <someValuesFrom rdf:resource="&geoi;DataView"/>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>a group of features that belong to the same class</rdfs:comment>
+    </Class>
+    
+
+
+    <!-- http://aurioldegbelo.github.io/geoi/ns#Trend -->
+
+    <Class rdf:about="&geoi;Trend">
+        <rdfs:subClassOf rdf:resource="&geoi;DataPattern"/>
+        <rdfs:comment>high-level change across a data dimension</rdfs:comment>
+    </Class>
+    
+
+
+    <!-- http://purl.org/dc/terms/Agent -->
+
+    <Class rdf:about="&terms;Agent">
+        <rdfs:comment>an entity that acts on a geovisualization</rdfs:comment>
+    </Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // General axioms
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description>
+        <rdf:type rdf:resource="&owl;AllDisjointClasses"/>
+        <members rdf:parseType="Collection">
+            <rdf:Description rdf:about="&geoi;Chart"/>
+            <rdf:Description rdf:about="&geoi;DataTable"/>
+            <rdf:Description rdf:about="&geoi;Map"/>
+        </members>
+    </rdf:Description>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 3.4.2) http://owlapi.sourceforge.net -->
+
