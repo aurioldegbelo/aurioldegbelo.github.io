@@ -1,4 +1,7 @@
-## Welcome to GitHub Pages
+## Welcome to My GitHub Pages
+
+This is the GitHub Pages of [Auriol Degbelo](https://sites.google.com/site/aurioldegbelo/). The website is a work in progress. For now, the text below is taken from the Jekyll template.
+
 
 You can use the [editor on GitHub](https://github.com/aurioldegbelo/aurioldegbelo.github.io/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
 
